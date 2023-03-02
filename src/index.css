@@ -1,0 +1,83 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+body{
+  @apply bg-[#F1F2F6]
+}
+
+
+  .nav-button-pathname{
+@apply text-blue-400 h-12 w-1/6 border-b-4 border-blue-400  flex items-center justify-center
+  }
+.nav-button-nopathname {
+  @apply h-12 w-1/6  flex items-center justify-center
+}
+ @layer components{
+  h1{
+    @apply text-3xl font-bold 
+  }
+  h2{
+    @apply text-2xl font-bold
+  }
+  h3{
+    @apply font-light text-sm
+  }
+  h4{
+    @apply text-lg font-bold
+  }
+  h5{
+    @apply text-xs
+  }
+  input{
+    @apply focus:outline-none
+  }
+  h6 {
+    @apply text-sm
+  }
+ }
+
+
+ .sidebar::-webkit-scrollbar {
+  scroll-behavior: smooth;
+  width: 0.75em;
+  visibility: hidden;
+  
+}
+.hide::-webkit-scrollbar {
+  display: none;
+}
+ 
+.sidebar::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  border-radius: 6px;
+}
+ 
+.sidebar::-webkit-scrollbar-thumb {
+  background-color: darkgrey;
+  border-radius: 6px;
+  
+}
+
+
+.swiper {
+  width: 100%;
+  height: 100%;
+}
+
+.swiper-slide {
+  text-align: center;
+  font-size: 18px;
+  background: #fff;
+
+  /* Center slide text vertically */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.swiper-slide img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}

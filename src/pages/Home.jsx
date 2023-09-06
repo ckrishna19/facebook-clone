@@ -30,7 +30,7 @@ const Home = () => {
 						<Sidebar />
 					</article>
 					<article className="lg:col-span-3">
-						<main className="w-full lg:w-[70%] mx-auto">
+						<main className="w-full md:w-[80%] lg:w-[70%] mx-auto">
 							<Reels />
 							<CreatePost handleShowModal={handleShowModal} />
 							{showCreateModel && <CreatePostModel handleCloseModal={handleCloseModal} />}

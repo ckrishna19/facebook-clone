@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React from "react";
 // Import Swiper React components
 import { Swiper, SwiperSlide } from "swiper/react";
 import { BsFillPlusCircleFill } from "react-icons/bs";
@@ -82,7 +82,7 @@ export default function App() {
 			</Swiper>
 			<Swiper slidesPerView={3.8} spaceBetween={10} className="block md:hidden">
 				<SwiperSlide>
-					<div className="w-full rounded-md border lg:h-60 md:h-40 h-32 relative">
+					<div className="w-full rounded-md border lg:h-60 md:h-40 h-40 relative">
 						<img
 							src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Image_created_with_a_mobile_phone.png/640px-Image_created_with_a_mobile_phone.png"
 							alt="story"
@@ -98,7 +98,7 @@ export default function App() {
 					.fill(0)
 					.map((_, i) => (
 						<SwiperSlide key={i}>
-							<div className="w-full border rounded-md lg:h-60 md:h-40 h-32 relative">
+							<div className="w-full border rounded-md lg:h-60 md:h-40 h-40 relative">
 								<img
 									src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Image_created_with_a_mobile_phone.png/640px-Image_created_with_a_mobile_phone.png"
 									alt="story"

@@ -1,15 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import { AiOutlineClose } from "react-icons/ai";
 import { FaUserFriends } from "react-icons/fa";
-import {
-	BsFillCaretDownFill,
-	BsCardImage,
-	BsEmojiSmile,
-	BsFillPersonFill,
-	BsFlagFill,
-	BsThreeDots,
-	BsFillPersonPlusFill,
-} from "react-icons/bs";
+import { BsFillCaretDownFill, BsCardImage, BsEmojiSmile, BsFillPersonFill, BsFlagFill, BsThreeDots, BsFillPersonPlusFill } from "react-icons/bs";
+import Axios from "axios";
 import { HiOutlineArrowNarrowLeft } from "react-icons/hi";
 import { IoMdPhotos } from "react-icons/io";
 import { IoLocationSharp } from "react-icons/io5";
@@ -18,6 +11,8 @@ import { IoMdPeople } from "react-icons/io";
 import { GoLocation } from "react-icons/go";
 import { MdEmojiEmotions } from "react-icons/md";
 const CreatePostModel = ({ handleCloseModal }) => {
+	const [postText, setPostText] = useState("");
+	const [image, setImage] = useState();
 	const arr = [
 		"#FF6633",
 		"#FFB399",
@@ -36,9 +31,19 @@ const CreatePostModel = ({ handleCloseModal }) => {
 		"#66991A",
 	];
 
+	const handleCreatePost = async (e) => {
+		e.preventDefault();
+		const formData = new FormData();
+
+		formData.append("postText", postText);
+		formData.append("image", image);
+		console.log(formData);
+		const res = await Axios.post("http://localhost:3002/post/new", formData);
+		console.log(res);
+	};
 	return (
 		<>
-			<main className="fixed inset-0 bg-[#f3f3f5] bg-opacity-10 backdrop-blur-[1px] z-10 hidden lg:block">
+			<main className="fixed inset-0 bg-black bg-opacity-70   z-40 hidden lg:block">
 				<section className="w-[35%] mx-auto rounded-md mt-[20vh] bg-white shadow-md  border border-gray-300 pb-4">
 					<article className=" py-3 flex justify-between items-center px-3 border-b border-gray-300">
 						<div className="" />
@@ -64,32 +69,46 @@ const CreatePostModel = ({ handleCloseModal }) => {
 							</div>
 						</aside>
 					</article>
-					<article className="mx-2">
-						<textarea
-							id="message"
-							rows="4"
-							placeholder="What's on your mind Sirish ?"
-							className="w-full focus:outline-none text-lg resize-none hide"
-						/>
-					</article>
-					<article className="mx-4 text-gray-500 flex justify-between items-center py-2 my-2">
-						<BsCardImage size={24} className="cursor-pointer" />
-						<BsEmojiSmile size={24} className="cursor-pointer" />
-					</article>
-					<article className="border border-gray-300 rounded-md px-2 py-3 mx-2 flex justify-between items-center">
-						<p>Add your post</p>
-						<aside className="flex items-center gap-x-1">
-							<IoMdPhotos size={24} className="text-green-500" />
-							<BsFillPersonFill size={24} className="text-blue-500" />
-							<BsEmojiSmile size={24} className="text-orange-500" />
-							<IoLocationSharp size={24} className="text-rose-500" />
-							<BsFlagFill size={24} className="text-cyan-500" />
-							<BsThreeDots size={24} className="text-gray-500" />
-						</aside>
-					</article>
-					<article className="mt-3 mx-2">
-						<button className="py-1 text-center text-white bg-blue-500 rounded-md w-full">Post</button>
-					</article>
+					<form action="" onSubmit={handleCreatePost}>
+						<article className="mx-2">
+							<textarea
+								id="message"
+								value={postText}
+								onChange={(e) => setPostText(e.target.value)}
+								rows="4"
+								placeholder="What's on your mind Sirish ?"
+								className="w-full focus:outline-none text-lg resize-none hide"
+							/>
+						</article>
+
+						<article className="mx-4 text-gray-500 flex justify-between items-center py-2 my-2">
+							<div className="inline-block">
+								<label htmlFor="file" className="cursor-pointer" >
+								<BsCardImage size={30} className="cursor-pointer text-blue-400" />
+
+								</label>
+								<input type="file" name="" id="file" className="hidden"  onChange={(e) => setImage(e.target.files[0])} />
+							</div>
+							<BsEmojiSmile size={24} className="cursor-pointer" />
+						</article>
+
+						<article className="border border-gray-300 rounded-md px-2 py-3 mx-2 flex justify-between items-center">
+							<p>Add your post</p>
+							<aside className="flex items-center gap-x-1">
+								<IoMdPhotos size={24} className="text-green-500" />
+								<BsFillPersonFill size={24} className="text-blue-500" />
+								<BsEmojiSmile size={24} className="text-orange-500" />
+								<IoLocationSharp size={24} className="text-rose-500" />
+								<BsFlagFill size={24} className="text-cyan-500" />
+								<BsThreeDots size={24} className="text-gray-500" />
+							</aside>
+						</article>
+						<article className="mt-3 mx-2">
+							<button className="py-1 text-center text-white bg-blue-500 rounded-md w-full" type="submit">
+								Post
+							</button>
+						</article>
+					</form>
 				</section>
 			</main>
 			<main className="block lg:hidden">
@@ -120,14 +139,7 @@ const CreatePostModel = ({ handleCloseModal }) => {
 						</aside>
 					</article>
 					<article className="w-full border">
-						<textarea
-							name=""
-							id=""
-							cols="30"
-							rows="10"
-							className="w-full resize-none focus:outline-none px-2  my-1"
-							placeholder="What's on your mind"
-						/>
+						<textarea name="" id="" cols="30" rows="10" className="w-full resize-none focus:outline-none px-2  my-1" placeholder="What's on your mind" />
 
 						<aside className="flex gap-x-2 py-1 px-2">
 							{arr.map((item, i) => (
